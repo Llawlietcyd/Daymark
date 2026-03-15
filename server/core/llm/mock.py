@@ -140,9 +140,12 @@ class MockLLMService(BaseLLMService):
         }
         songs = list(songs_by_mood.get(mood_level, songs_by_mood[3]))
         if refresh_token:
-            seed = hashlib.md5(f"{mood_level}:{refresh_token}".encode()).hexdigest()
-            shift = int(seed[:2], 16) % len(songs)
-            songs = songs[shift:] + songs[:shift]
+            songs = sorted(
+                songs,
+                key=lambda song: hashlib.md5(
+                    f'{mood_level}:{refresh_token}:{song.get("name", "")}:{song.get("artist", "")}'.encode()
+                ).hexdigest(),
+            )
         blocked = {item.strip().casefold() for item in (exclude_songs or []) if item.strip()}
         if blocked:
             fresh = [
