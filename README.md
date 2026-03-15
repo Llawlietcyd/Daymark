@@ -22,7 +22,6 @@ The project is built as a full-stack product:
 - [Local Development](#local-development)
 - [Configuration](#configuration)
 - [Testing](#testing)
-- [Deployment Notes](#deployment-notes)
 - [Security and Secrets](#security-and-secrets)
 - [Known Implementation Notes](#known-implementation-notes)
 - [中文说明](#中文说明)
@@ -199,9 +198,6 @@ The SQLite bootstrap layer also includes compatibility patching for local schema
 Deletion-planner/
 ├── README.md
 ├── docker-compose.yml
-├── docs/
-│   ├── DEPLOYMENT.md
-│   └── WALKTHROUGH_SCRIPT.md
 ├── frontend/
 │   ├── package.json
 │   ├── public/
@@ -437,17 +433,6 @@ npm test -- --runInBand --watch=false
 ```bash
 npm run build
 ```
-
-## Deployment Notes
-
-See:
-- [docs/DEPLOYMENT.md](/Users/chenyidian/Documents/anote/Deletion-planner/docs/DEPLOYMENT.md)
-- [docs/WALKTHROUGH_SCRIPT.md](/Users/chenyidian/Documents/anote/Deletion-planner/docs/WALKTHROUGH_SCRIPT.md)
-
-Current deployment assumptions:
-- local dev can use SQLite
-- Docker stack uses PostgreSQL
-- FastAPI app is the main backend entry point
 
 ## Security and Secrets
 
@@ -764,9 +749,6 @@ npm run build
 ## 部署说明
 
 现有补充文档：
-- [docs/DEPLOYMENT.md](/Users/chenyidian/Documents/anote/Deletion-planner/docs/DEPLOYMENT.md)
-- [docs/WALKTHROUGH_SCRIPT.md](/Users/chenyidian/Documents/anote/Deletion-planner/docs/WALKTHROUGH_SCRIPT.md)
-
 当前建议：
 - 本地开发可用 SQLite
 - 演示或更稳定联调建议用 Docker + PostgreSQL
