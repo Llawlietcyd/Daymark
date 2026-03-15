@@ -2,7 +2,7 @@
 
 English | [中文](#中文说明)
 
-Daymark is a deletion-first daily planning app that combines task management, AI-assisted planning, review, mood check-ins, focus timing, music recommendations, tarot-style daily fortune, and an in-app concierge chatbox.
+Daymark is a bilingual personal daily operating board that combines planning, execution, review, mood, focus, music, fortune, and an in-app concierge into one continuous workflow.
 
 The project is built as a full-stack product:
 - `frontend/`: React 18 application
@@ -11,7 +11,7 @@ The project is built as a full-stack product:
 
 ## Table of Contents
 - [Project Overview](#project-overview)
-- [Core Product Philosophy](#core-product-philosophy)
+- [Product Concept](#product-concept)
 - [What the App Includes](#what-the-app-includes)
 - [Screens and User Flow](#screens-and-user-flow)
 - [Architecture](#architecture)
@@ -28,33 +28,35 @@ The project is built as a full-stack product:
 
 ## Project Overview
 
-Most planning tools help users add more tasks. This project starts from the opposite assumption: the real problem is often overload, not lack of ambition.
+Daymark is no longer just a deletion-first to-do app. In its current form, it is closer to a personal daily operating board:
+- tasks live alongside mood, focus, review, and future scheduling
+- the user sees execution, reflection, and emotional context in one place
+- the concierge can answer questions about real app state, not only mutate tasks
+- the product is designed around a day/week/month rhythm rather than a flat task list
 
-Daymark is designed to help a user:
-- capture tasks and recurring commitments
-- generate a smaller and more realistic daily plan
-- defer, delete, or complete tasks with a visible history trail
-- review behavior across days, weeks, and months
-- log mood and focus sessions
-- talk to an in-app concierge that can answer questions or act inside the app
+In practice, Daymark helps a user:
+- capture tasks, recurring commitments, and scheduled one-offs
+- turn backlog into a realistic Today board
+- log what actually happened through completion, defer, delete, mood, and focus signals
+- revisit the month through review history and future arrangements
+- ask the app questions conversationally instead of hunting through screens
 
-The app is bilingual at the product level and already contains significant Chinese-first UX.
+The app is bilingual end-to-end and already optimized for a Chinese-first user flow.
 
-## Core Product Philosophy
+## Product Concept
 
-The core idea is deletion-first planning:
-- a shorter plan is better than an unrealistic plan
-- deferral history matters
-- repeated friction is data
-- the system should help the user decide what not to do
-- AI should act as a reasoning layer, not just a task storage layer
+The current product concept is:
 
-This philosophy appears in:
-- plan generation
-- deletion suggestions
-- review insights
-- concierge actions
-- recurring task handling
+**Daymark is a time-aware personal command center for daily life.**
+
+It combines five layers that now matter equally:
+- **Planning**: tasks, recurring structure, and realistic daily selection
+- **Execution**: Today board, completion flow, defer/delete decisions, and focus sessions
+- **Reflection**: review calendar, weekly summaries, and behavioral traces
+- **Emotional context**: mood logging, music recommendations, and daily fortune
+- **Conversation**: an in-app concierge that can answer, clarify, and act
+
+Deletion-first logic still matters, but it is now one subsystem inside a broader product. The app is better described as a daily operating system than as a pure task-pruning tool.
 
 ## What the App Includes
 
@@ -75,10 +77,12 @@ This philosophy appears in:
 - Due date support
 - Recurrence weekday support
 - Reordering and CRUD
+- Daily / weekly structure that feeds both Today and Review
 
 ### 3. Today view
 - Daily plan generation
 - Daily completion / defer / delete actions
+- Inspiration capture and Today board execution
 - Mood check-in
 - Focus timer / pomodoro
 - Song recommendations
@@ -103,6 +107,7 @@ This philosophy appears in:
 - Date-aware schedule questions
 - Follow-up context like “that day”, “that task”, “next Tuesday then”
 - LLM-first answering path with deterministic fallback
+- App-state grounded answers instead of generic chat
 
 ### 7. Settings
 - DeepSeek runtime configuration
@@ -122,12 +127,12 @@ This philosophy appears in:
 ### Typical flow
 1. User logs in.
 2. User completes onboarding with commitments and goals.
-3. User adds one-off, daily, and weekly tasks.
-4. User generates a daily plan.
-5. User executes tasks from the Today board.
-6. User logs mood and focus sessions.
-7. User reviews patterns in Review and Insights.
-8. User uses the concierge to query or manipulate data conversationally.
+3. User adds one-off, daily, and weekly tasks into Inbox.
+4. User generates a daily plan and works from the Today board.
+5. User completes, defers, or deletes tasks while also logging mood and focus.
+6. User receives contextual music and daily fortune as part of the day loop.
+7. User reviews patterns through the calendar and weekly insight surfaces.
+8. User uses the concierge to ask schedule questions or directly operate on app state.
 
 ## Architecture
 
@@ -195,7 +200,7 @@ The SQLite bootstrap layer also includes compatibility patching for local schema
 ## Repository Structure
 
 ```text
-Deletion-planner/
+Deletion-planner/  (repository folder; product name: Daymark)
 ├── README.md
 ├── docker-compose.yml
 ├── frontend/
@@ -467,7 +472,7 @@ Safe practice:
 
 ## 项目概述
 
-Daymark / Deletion Planner 是一个“删除优先”的每日规划产品。它不只是帮用户记任务，而是把任务、每日计划、复盘、心情、专注、音乐推荐、塔罗式每日指引和私人管家聊天框整合到同一个系统里。
+Daymark / Deletion Planner 现在已经不只是一个“删除优先”的待办工具了。按当前功能来看，它更像一个围绕真实日常节奏搭建的个人操作台：任务、今日计划、月历复盘、心情、专注、音乐、每日运势和私人管家都被放进了同一个系统里。
 
 项目当前是完整的前后端应用：
 - `frontend/`：React 18 前端
@@ -476,13 +481,18 @@ Daymark / Deletion Planner 是一个“删除优先”的每日规划产品。�
 
 ## 产品理念
 
-这个产品的核心不是“多做一点”，而是“做得更现实一点”。
+当前这版 Daymark 的产品概念更适合描述为：
 
-也就是说：
-- 计划过满比计划过少更危险
-- 一直推迟的任务本身就是信号
-- 不是所有任务都值得继续挂在列表里
-- AI 不应该只是帮你排序，也应该帮你减负
+**一个有时间轴、有情绪上下文、也能对话的个人日常操作系统。**
+
+它现在包含五层能力，而且这五层都已经是产品主体的一部分：
+- **规划层**：任务录入、周期任务、今日计划生成
+- **执行层**：Today board、完成 / defer / 删除、番茄钟
+- **复盘层**：月历复盘、每日记录、周总结、统计面板
+- **状态层**：心情记录、音乐推荐、每日运势
+- **对话层**：私人管家问答与站内动作执行
+
+删除优先仍然是核心思路之一，但它已经不是唯一的产品定义。现在更准确的理解，是 Daymark 在帮用户把“今天做什么、做得怎么样、心情如何、未来怎么排、能不能直接问 AI”放到一个连续系统里。
 
 ## 主要功能
 
@@ -503,10 +513,12 @@ Daymark / Deletion Planner 是一个“删除优先”的每日规划产品。�
 - 截止日期
 - 周期星期配置
 - 排序、编辑、删除
+- 作为 Today 和 Review 的输入层
 
 ### 3. Today 页面
 - 生成当天计划
 - 勾选完成 / defer / 删除
+- 灵感记录与当天执行面板
 - 心情打卡
 - 番茄钟 / 专注计时
 - 音乐推荐
@@ -531,6 +543,7 @@ Daymark / Deletion Planner 是一个“删除优先”的每日规划产品。�
 - 能回答“某天 / 某周几有什么安排”
 - 支持“那天”“那个任务”“那下周二呢”这类上下文追问
 - 走 LLM 优先问答路径，同时保留本地兜底
+- 回答会尽量绑定真实 app 状态，而不是泛泛聊天
 
 ### 7. Settings
 - DeepSeek 配置
@@ -748,7 +761,6 @@ npm run build
 
 ## 部署说明
 
-现有补充文档：
 当前建议：
 - 本地开发可用 SQLite
 - 演示或更稳定联调建议用 Docker + PostgreSQL
